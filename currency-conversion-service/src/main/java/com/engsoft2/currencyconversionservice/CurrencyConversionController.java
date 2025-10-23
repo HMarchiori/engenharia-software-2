@@ -38,6 +38,7 @@ public class CurrencyConversionController {
 
         CurrencyConversion currencyConversion = responseEntity.getBody();
 
+        assert currencyConversion != null;
         return new CurrencyConversion(
                 currencyConversion.getId(),
                 from,
