@@ -15,7 +15,5 @@ public class FallbackController {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Serviços temporariamente indisponíveis. Tente novamente.");
-        // Implementação mais adequada seria retornar dados em cache de
-        // uma requisição anterior com sucesso
     }
 }

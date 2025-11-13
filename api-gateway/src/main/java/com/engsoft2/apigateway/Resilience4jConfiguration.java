@@ -26,7 +26,7 @@ public class Resilience4jConfiguration {
                         )
                         .timeLimiterConfig(
                                 TimeLimiterConfig.custom()
-                                        .timeoutDuration(Duration.ofMillis(200))
+                                        .timeoutDuration(Duration.ofSeconds(2))
                                         .build()
                         )
                         .build()

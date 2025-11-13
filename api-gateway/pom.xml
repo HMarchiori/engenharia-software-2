@@ -4,11 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
+        <version>3.3.13</version>
         <relativePath/>
     </parent>
 
@@ -20,8 +19,7 @@
 
     <properties>
         <java.version>17</java.version>
-
-        <spring-cloud.version>2023.0.4</spring-cloud.version>
+        <spring-cloud.version>2023.0.6</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -42,7 +40,7 @@
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
-        <!-- Eureka Client (atenção ao artifactId sem quebras de linha) -->
+        <!-- Eureka Client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -63,7 +61,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- (Opcional – macOS) evita warning de DNS nativo no Netty -->
+        <!-- Opcional – macOS, pode manter como está -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-resolver-dns-native-macos</artifactId>
@@ -74,7 +72,7 @@
         </dependency>
     </dependencies>
 
-    <!-- Importa o BOM do Spring Cloud; não fixe versão individual do gateway -->
+    <!-- Importa o BOM do Spring Cloud -->
     <dependencyManagement>
         <dependencies>
             <dependency>
