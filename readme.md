@@ -1,4 +1,6 @@
-# Comadnso
+# Comandos 
 
-docker compose down
-docker compose up --build
+## Usem esses 2 para rodar
+
+    docker compose down
+    docker compose up --build
