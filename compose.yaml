@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   naming-server:
     build: ./naming-server
@@ -6,7 +8,6 @@ services:
       - "8761:8761"
     networks:
       - currency-network
-
 
   currency-exchange:
     build: ./currency-exchange-service
@@ -18,8 +19,8 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
-
+      # SPRING reads env like this (UPPERCASE + _)
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
   currency-conversion:
     build: ./currency-conversion-service
@@ -31,8 +32,7 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
-
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
   api-gateway:
     build: ./api-gateway
@@ -44,8 +44,8 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
-
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
 networks:
   currency-network:
+    driver: bridge
