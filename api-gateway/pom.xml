@@ -4,11 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Boot 3.0.x + Cloud 2022.0.x (Kilburn) = OK -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.12</version>
+        <version>3.5.7</version>
         <relativePath/>
     </parent>
 
@@ -20,12 +19,10 @@
 
     <properties>
         <java.version>17</java.version>
-        <!-- Cloud 2022.0.5 BOM alinha o Spring Cloud Gateway 4.0.x com Spring Framework 6.0.x -->
-        <spring-cloud.version>2022.0.5</spring-cloud.version>
+        <spring-cloud.version>2023.0.6</spring-cloud.version>
     </properties>
 
     <dependencies>
-        <!-- Actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -35,20 +32,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
         </dependency>
-
-        <!-- Spring Cloud Gateway (WebFlux) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
-        <!-- Eureka Client (atenção ao artifactId sem quebras de linha) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- Dev only -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -56,14 +49,12 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- (Opcional – macOS) evita warning de DNS nativo no Netty -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-resolver-dns-native-macos</artifactId>
@@ -74,7 +65,6 @@
         </dependency>
     </dependencies>
 
-    <!-- Importa o BOM do Spring Cloud; não fixe versão individual do gateway -->
     <dependencyManagement>
         <dependencies>
             <dependency>
