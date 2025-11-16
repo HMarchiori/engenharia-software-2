@@ -5,9 +5,9 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class ApiGatewayConfiguration {
-
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -16,10 +16,12 @@ public class ApiGatewayConfiguration {
                 .route(p -> p.path("/currency-conversion/**")
                         .filters(f -> f.circuitBreaker(c ->
                                 c.setName("circuitbreaker_conversion")
-                                        .setFallbackUri("forward:/fallback/currency-conversion")))
+                                        .setFallbackUri("forward:/fallback/currency-conversion")
+                        ))
                         .uri("lb://currency-conversion"))
                 .route(p -> p.path("/currency-conversion-feign/**")
                         .uri("lb://currency-conversion"))
                 .build();
     }
+
 }
