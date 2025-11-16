@@ -46,6 +46,21 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
+  currency-report:
+    build:
+      context: ./currency-report
+      dockerfile: Dockerfile
+    image: currency-report
+    container_name: currency-report
+    ports:
+      - "8080:8080"   # host:container
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+
 networks:
   currency-network:
     driver: bridge
