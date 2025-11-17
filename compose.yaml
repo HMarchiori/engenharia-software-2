@@ -1,20 +1,11 @@
+version: "3.9"
+
 services:
   naming-server:
     build: ./naming-server
     image: naming
     ports:
       - "8761:8761"
-    networks:
-      - currency-network
-
-  rabbitmq:
-    image: rabbitmq:management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      - RABBITMQ_DEFAULT_USER=engsoft2
-      - RABBITMQ_DEFAULT_PASS=engsoft2
     networks:
       - currency-network
 
@@ -28,7 +19,8 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
+      # SPRING reads env like this (UPPERCASE + _)
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
   currency-conversion:
     build: ./currency-conversion-service
@@ -39,13 +31,8 @@ services:
       - currency-network
     depends_on:
       - naming-server
-      - rabbitmq
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
-      - spring.rabbitmq.host=rabbitmq
-      - spring.rabbitmq.port=5672
-      - spring.rabbitmq.username=engsoft2
-      - spring.rabbitmq.password=engsoft2
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
   api-gateway:
     build: ./api-gateway
@@ -57,24 +44,40 @@ services:
     depends_on:
       - naming-server
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
-  history-service:
-    build: ./history-service
-    image: history
+  currency-report:
+    build:
+      context: ./currency-report
+      dockerfile: Dockerfile
+    image: currency-report
+    container_name: currency-report
     ports:
-      - "8120:8120"
+      - "8080:8080"   # host:container
     networks:
       - currency-network
     depends_on:
       - naming-server
-      - rabbitmq
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
-      - spring.rabbitmq.host=rabbitmq
-      - spring.rabbitmq.port=5672
-      - spring.rabbitmq.username=engsoft2
-      - spring.rabbitmq.password=engsoft2
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+
+
+  currency-history:
+    build:
+      context: ./currency-history
+      dockerfile: Dockerfile
+    image: currency-history
+    container_name: currency-history
+    ports:
+      - "8082:8082"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+
 
 networks:
   currency-network:
+    driver: bridge
