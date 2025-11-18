@@ -19,7 +19,7 @@ services:
     depends_on:
       - naming-server
     environment:
-      # SPRING reads env like this (UPPERCASE + _)
+
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
 
   currency-conversion:
@@ -53,7 +53,7 @@ services:
     image: currency-report
     container_name: currency-report
     ports:
-      - "8080:8080"   # host:container
+      - "8080:8080"
     networks:
       - currency-network
     depends_on:
