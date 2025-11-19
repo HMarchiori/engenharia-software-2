@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build & test naming-server
+        run: mvn -f naming-server/pom.xml clean verify
+
+      - name: Build & test currency-exchange-service
+        run: mvn -f currency-exchange-service/pom.xml clean verify
+
+      - name: Build & test currency-conversion-service
+        run: mvn -f currency-conversion-service/pom.xml clean verify
+
+      - name: Build & test api-gateway
+        run: mvn -f api-gateway/pom.xml clean verify
+
+      - name: Build & test currency-report
+        run: mvn -f currency-report/pom.xml clean verify
+
+      - name: Build & test currency-history
+        run: mvn -f currency-history/pom.xml clean verify
+
+      - name: Docker compose build
+        run: docker compose -f docker-compose.yml build
