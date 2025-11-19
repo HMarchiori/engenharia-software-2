@@ -36,12 +36,12 @@ Após o ambiente estar em execução, é possível validar utilizando `curl`.
 
 Currency Conversion:
 ```bash
-curl http://localhost:8765/currency-report/health
+curl "http://localhost:8765/currency-report/health"
 ```
 
 Currency History:
 ```bash
-curl http://localhost:8765/currency-history/health
+curl "http://localhost:8765/currency-history/health"
 ```
 
 ---
@@ -50,12 +50,12 @@ curl http://localhost:8765/currency-history/health
 
 **Cotação convertida:**
 ```bash
-curl http://localhost:8765/currency-report/quote?from=USD&to=BRL
+curl "http://localhost:8765/currency-report/quote?from=USD&to=BRL"
 ```
 
 **Histórico de conversões:**
 ```bash
-curl http://localhost:8765/currency-history/history?from=USD&to=BRL
+curl "http://localhost:8765/currency-history/history?from=USD&to=BRL"
 ```
 
 ---
