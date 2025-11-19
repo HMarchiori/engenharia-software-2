@@ -39,4 +39,4 @@ jobs:
         run: mvn -f currency-history/pom.xml clean verify
 
       - name: Docker Compose Build
-        run: docker compose -f compose.yml build
+        run: docker compose -f compose.yaml build
