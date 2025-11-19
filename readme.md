@@ -48,12 +48,12 @@ curl "http://localhost:8765/currency-history/health"
 
 ### 2.2 Endpoints Principais
 
-**Cotação convertida:**
+Currency Report:
 ```bash
 curl "http://localhost:8765/currency-report/quote?from=USD&to=BRL"
 ```
 
-**Histórico de conversões:**
+Currency History:
 ```bash
 curl "http://localhost:8765/currency-history/history?from=USD&to=BRL"
 ```
