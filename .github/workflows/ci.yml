@@ -20,23 +20,23 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Build & test naming-server
+      - name: Build & test Naming Server
         run: mvn -f naming-server/pom.xml clean verify
 
-      - name: Build & test currency-exchange-service
+      - name: Build & test Currency Exchange Service
         run: mvn -f currency-exchange-service/pom.xml clean verify
 
-      - name: Build & test currency-conversion-service
+      - name: Build & test Currency Conversion Service
         run: mvn -f currency-conversion-service/pom.xml clean verify
 
-      - name: Build & test api-gateway
+      - name: Build & test API Gateway
         run: mvn -f api-gateway/pom.xml clean verify
 
-      - name: Build & test currency-report
+      - name: Build & test Currency Report
         run: mvn -f currency-report/pom.xml clean verify
 
-      - name: Build & test currency-history
+      - name: Build & test Currency History
         run: mvn -f currency-history/pom.xml clean verify
 
-      - name: Docker compose build
-        run: docker compose -f docker-compose.yml build
+      - name: Docker Compose Build
+        run: docker compose -f compose.yml build
